@@ -442,31 +442,18 @@ df_ax18 = (cumul_results[['StationId', 'ELNX', 'EL_indefini_left']]
 # %% [markdown]
 # # Export Data to excel
 
-# %%
-with pd.ExcelWriter('output.xlsx') as writer:
-
-    df_ax1.to_excel(writer, index=True, sheet_name='ax1')
-
-    df_ax3.to_excel(writer, index=False, sheet_name='ax3')
-
-    df_ax5.to_excel(writer, index=False, sheet_name='ax5')
-
-    df_ax6.to_excel(writer, index=False, sheet_name='ax6')
-
-    df_ax8.to_excel(writer, index=False, sheet_name='ax8')
-
-    df_ax9.to_excel(writer, index=False, sheet_name='ax9')
-
-    df_ax18.to_excel(writer, index=False, sheet_name='ax10')
-
 
 # %%
-with pd.ExcelWriter('output.xlsx') as writer:
+writer = pd.ExcelWriter('output.xlsx')
 
-    workbook = writer.book
+workbook = writer.book
+dashsheet = workbook.add_worksheet('Dash')
 
-    df_ax3.to_excel(writer, index=False, sheet_name='ax3')
-    worksheet = writer.sheets['ax3']
+df_ax3.to_excel(writer, index=False, sheet_name='ax3')
+worksheet = writer.sheets['ax3']
+
+
+def make_chart_ax3():
     column_chart = workbook.add_chart({'type': 'column'})
 
     column_chart.add_series({'values': ['ax3', 1, 1, 13, 1],
@@ -492,16 +479,26 @@ with pd.ExcelWriter('output.xlsx') as writer:
     column_chart.set_y_axis({'name': df_ax3.columns[1]})
     column_chart.set_legend({'position': 'bottom'})
     column_chart.set_title({'name': 'Cumul annuel par type d\'alarme'})
-
     line_chart.set_y2_axis({'name': df_ax3.columns[2]})
+    return column_chart
 
-    # Insert the chart into the worksheet.
-    worksheet.insert_chart('E2', column_chart)
 
-    # --------
-    df_ax5.to_excel(writer, index=False, sheet_name='ax5')
+column_chart = make_chart_ax3()
+# Insert the chart into the worksheet.
+worksheet.insert_chart('E2', column_chart)
 
-    worksheet = writer.sheets['ax5']
+column_chart = make_chart_ax3()
+# Insert the chart into the worksheet.
+dashsheet.insert_chart('B42', column_chart)
+
+
+# -------------------------------------------------------------------------------------------
+df_ax5.to_excel(writer, index=False, sheet_name='ax5')
+
+worksheet = writer.sheets['ax5']
+
+
+def make_chart_ax5():
     column_chart = workbook.add_chart({'type': 'column'})
 
     column_chart.add_series({'values': ['ax5', 1, 1, 13, 1],
@@ -529,14 +526,26 @@ with pd.ExcelWriter('output.xlsx') as writer:
     column_chart.set_title({'name': f'Type d\'alarme {period}'})
 
     line_chart.set_y2_axis({'name': df_ax5.columns[2]})
+    return column_chart
 
-    # Insert the chart into the worksheet.
-    worksheet.insert_chart('E2', column_chart)
 
-    # --------
-    df_ax6.to_excel(writer, index=False, sheet_name='ax6')
+# Insert the chart into the worksheet.
+column_chart = make_chart_ax5()
+# Insert the chart into the worksheet.
+worksheet.insert_chart('E2', column_chart)
 
-    worksheet = writer.sheets['ax6']
+column_chart = make_chart_ax5()
+# Insert the chart into the worksheet.
+dashsheet.insert_chart('U42', column_chart)
+
+
+# --------
+df_ax6.to_excel(writer, index=False, sheet_name='ax6')
+
+worksheet = writer.sheets['ax6']
+
+
+def make_chart_ax6():
     column_chart = workbook.add_chart({'type': 'column'})
 
     column_chart.add_series({'values': ['ax6', 1, 1, 20, 1],
@@ -564,14 +573,26 @@ with pd.ExcelWriter('output.xlsx') as writer:
     column_chart.set_title({'name': f'Alarmes {period}'})
 
     line_chart.set_y2_axis({'name': df_ax6.columns[2]})
+    return column_chart
 
-    # Insert the chart into the worksheet.
-    worksheet.insert_chart('E2', column_chart)
 
-    # --------
-    df_ax8.to_excel(writer, index=False, sheet_name='ax8')
+# Insert the chart into the worksheet.
+column_chart = make_chart_ax6()
+# Insert the chart into the worksheet.
+worksheet.insert_chart('E2', column_chart)
 
-    worksheet = writer.sheets['ax8']
+column_chart = make_chart_ax6()
+# Insert the chart into the worksheet.
+dashsheet.insert_chart('AC42', column_chart)
+
+
+# ------------------------------------------------------------------------------------------------
+df_ax8.to_excel(writer, index=False, sheet_name='ax8')
+
+worksheet = writer.sheets['ax8']
+
+
+def make_chart_ax8():
     column_chart = workbook.add_chart({'type': 'column'})
 
     column_chart.add_series({'values': ['ax8', 1, 3, 20, 3],
@@ -610,15 +631,27 @@ with pd.ExcelWriter('output.xlsx') as writer:
     column_chart.set_title({'name': 'Arrêts turbines : Cumul Annuel'})
 
     line_chart.set_y2_axis({'name': 'Duration'})
+    return column_chart
 
-    # Insert the chart into the worksheet.
-    worksheet.insert_chart('G2', column_chart)
 
-    # --------
-    # --------
-    df_ax9.to_excel(writer, index=False, sheet_name='ax9')
+# Insert the chart into the worksheet.
+column_chart = make_chart_ax8()
+# Insert the chart into the worksheet.
+worksheet.insert_chart('G2', column_chart)
 
-    worksheet = writer.sheets['ax9']
+column_chart = make_chart_ax8()
+# Insert the chart into the worksheet.
+dashsheet.insert_chart('E58', column_chart)
+
+
+# ----------------------------------------------------------------------------------------
+# --------
+df_ax9.to_excel(writer, index=False, sheet_name='ax9')
+
+worksheet = writer.sheets['ax9']
+
+
+def make_chart_ax9():
     column_chart = workbook.add_chart({'type': 'column'})
 
     column_chart.add_series({'values': ['ax9', 1, 3, 20, 3],
@@ -654,16 +687,29 @@ with pd.ExcelWriter('output.xlsx') as writer:
     column_chart.set_x_axis({'name': df_ax9.columns[0]})
     column_chart.set_y_axis({'name': 'Freq'})
     column_chart.set_legend({'position': 'bottom'})
-    column_chart.set_title({'name': f'Arrêts turbines {period}'})
+    column_chart.set_title({'name': f'Arrêts turbines {period}',
+                            'font':  {'name': 'Arial', 'size': 9}})
 
     line_chart.set_y2_axis({'name': 'Duration'})
+    return column_chart
 
-    # Insert the chart into the worksheet.
-    worksheet.insert_chart('G2', column_chart)
-    # --------
-    df_ax18.to_excel(writer, index=False, sheet_name='ax18')
 
-    worksheet = writer.sheets['ax18']
+# Insert the chart into the worksheet.
+column_chart = make_chart_ax9()
+# Insert the chart into the worksheet.
+worksheet.insert_chart('G2', column_chart)
+
+column_chart = make_chart_ax9()
+# Insert the chart into the worksheet.
+dashsheet.insert_chart('M58', column_chart)
+
+# ----------------------------------------------------------------------------------------
+df_ax18.to_excel(writer, index=False, sheet_name='ax18')
+
+worksheet = writer.sheets['ax18']
+
+
+def make_chart_ax18():
     column_chart = workbook.add_chart({'type': 'column',
                                        'subtype': 'stacked'})
 
@@ -678,10 +724,20 @@ with pd.ExcelWriter('output.xlsx') as writer:
     column_chart.set_legend({'position': 'bottom'})
     column_chart.set_title(
         {'name': 'Energie perdue selon FSA cumulée sur l\'année 2020 en MWh',
-         'font':  {'name': 'Arial', 'size': 9}})
+         'name_font': {'size': 10, 'bold': True}}
+    )
+    return column_chart
 
-    # Insert the chart into the worksheet.
-    worksheet.insert_chart('E2', column_chart)
+
+# Insert the chart into the worksheet.
+column_chart = make_chart_ax18()
+# Insert the chart into the worksheet.
+worksheet.insert_chart('E2', column_chart)
+
+column_chart = make_chart_ax18()
+# Insert the chart into the worksheet.
+dashsheet.insert_chart('U58', column_chart)
 
 
+writer.save()
 # %%
