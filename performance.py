@@ -463,15 +463,14 @@ with pd.ExcelWriter('output.xlsx') as writer:
 # %%
 with pd.ExcelWriter('output.xlsx') as writer:
 
-    df_ax3.to_excel(writer, index=False, sheet_name='ax3')
     workbook = writer.book
+
+    df_ax3.to_excel(writer, index=False, sheet_name='ax3')
     worksheet = writer.sheets['ax3']
     column_chart = workbook.add_chart({'type': 'column'})
 
-    categories = ['ax3', 1, 0, 13, 0]
-
     column_chart.add_series({'values': ['ax3', 1, 1, 13, 1],
-                             'categories': categories,
+                             'categories': ['ax3', 1, 0, 13, 0],
                              'name': ['ax3', 0, 1]})
 
     line_chart = workbook.add_chart({'type': 'line'})
@@ -480,7 +479,7 @@ with pd.ExcelWriter('output.xlsx') as writer:
     # secondary Y axis via (y2_axis).
     line_chart.add_series({
         'name': ['ax3', 0, 2],
-        'categories': categories,
+        'categories': ['ax3', 1, 0, 13, 0],
         'values': ['ax3', 1, 2, 13, 2],
         'y2_axis': True,
     })
@@ -491,9 +490,198 @@ with pd.ExcelWriter('output.xlsx') as writer:
     # Configure the chart axes.
     column_chart.set_x_axis({'name': df_ax3.columns[0]})
     column_chart.set_y_axis({'name': df_ax3.columns[1]})
+    column_chart.set_legend({'position': 'bottom'})
+    column_chart.set_title({'name': 'Cumul annuel par type d\'alarme'})
 
     line_chart.set_y2_axis({'name': df_ax3.columns[2]})
 
-    column_chart.set_legend({'position': 'bottom'})
     # Insert the chart into the worksheet.
     worksheet.insert_chart('E2', column_chart)
+
+    # --------
+    df_ax5.to_excel(writer, index=False, sheet_name='ax5')
+
+    worksheet = writer.sheets['ax5']
+    column_chart = workbook.add_chart({'type': 'column'})
+
+    column_chart.add_series({'values': ['ax5', 1, 1, 13, 1],
+                             'categories': ['ax5', 1, 0, 13, 0],
+                             'name': ['ax5', 0, 1]})
+
+    line_chart = workbook.add_chart({'type': 'line'})
+
+    # Configure the data series for the secondary chart. We also set a
+    # secondary Y axis via (y2_axis).
+    line_chart.add_series({
+        'name': ['ax5', 0, 2],
+        'categories': ['ax5', 1, 0, 13, 0],
+        'values': ['ax5', 1, 2, 13, 2],
+        'y2_axis': True,
+    })
+
+    # Combine the charts.
+    column_chart.combine(line_chart)
+
+    # Configure the chart axes.
+    column_chart.set_x_axis({'name': df_ax5.columns[0]})
+    column_chart.set_y_axis({'name': df_ax5.columns[1]})
+    column_chart.set_legend({'position': 'bottom'})
+    column_chart.set_title({'name': f'Type d\'alarme {period}'})
+
+    line_chart.set_y2_axis({'name': df_ax5.columns[2]})
+
+    # Insert the chart into the worksheet.
+    worksheet.insert_chart('E2', column_chart)
+
+    # --------
+    df_ax6.to_excel(writer, index=False, sheet_name='ax6')
+
+    worksheet = writer.sheets['ax6']
+    column_chart = workbook.add_chart({'type': 'column'})
+
+    column_chart.add_series({'values': ['ax6', 1, 1, 20, 1],
+                             'categories': ['ax6', 1, 0, 20, 0],
+                             'name': ['ax6', 0, 1]})
+
+    line_chart = workbook.add_chart({'type': 'line'})
+
+    # Configure the data series for the secondary chart. We also set a
+    # secondary Y axis via (y2_axis).
+    line_chart.add_series({
+        'name': ['ax6', 0, 2],
+        'categories': ['ax6', 1, 0, 20, 0],
+        'values': ['ax6', 1, 2, 20, 2],
+        'y2_axis': True,
+    })
+
+    # Combine the charts.
+    column_chart.combine(line_chart)
+
+    # Configure the chart axes.
+    column_chart.set_x_axis({'name': df_ax6.columns[0]})
+    column_chart.set_y_axis({'name': df_ax6.columns[1]})
+    column_chart.set_legend({'position': 'bottom'})
+    column_chart.set_title({'name': f'Alarmes {period}'})
+
+    line_chart.set_y2_axis({'name': df_ax6.columns[2]})
+
+    # Insert the chart into the worksheet.
+    worksheet.insert_chart('E2', column_chart)
+
+    # --------
+    df_ax8.to_excel(writer, index=False, sheet_name='ax8')
+
+    worksheet = writer.sheets['ax8']
+    column_chart = workbook.add_chart({'type': 'column'})
+
+    column_chart.add_series({'values': ['ax8', 1, 3, 20, 3],
+                             'categories': ['ax8', 1, 0, 20, 0],
+                             'name': ['ax8', 0, 3]})
+
+    column_chart.add_series({'values': ['ax8', 1, 4, 20, 4],
+                             'categories': ['ax8', 1, 0, 20, 0],
+                             'name': ['ax8', 0, 4]})
+
+    line_chart = workbook.add_chart({'type': 'line'})
+
+    # Configure the data series for the secondary chart. We also set a
+    # secondary Y axis via (y2_axis).
+    line_chart.add_series({
+        'name': ['ax8', 0, 1],
+        'categories': ['ax8', 1, 0, 20, 0],
+        'values': ['ax8', 1, 1, 20, 1],
+        'y2_axis': True,
+    })
+
+    line_chart.add_series({
+        'name': ['ax8', 0, 2],
+        'categories': ['ax8', 1, 0, 20, 0],
+        'values': ['ax8', 1, 2, 20, 2],
+        'y2_axis': True,
+    })
+
+    # Combine the charts.
+    column_chart.combine(line_chart)
+
+    # Configure the chart axes.
+    column_chart.set_x_axis({'name': df_ax8.columns[0]})
+    column_chart.set_y_axis({'name': 'Freq'})
+    column_chart.set_legend({'position': 'bottom'})
+    column_chart.set_title({'name': 'Arrêts turbines : Cumul Annuel'})
+
+    line_chart.set_y2_axis({'name': 'Duration'})
+
+    # Insert the chart into the worksheet.
+    worksheet.insert_chart('G2', column_chart)
+
+    # --------
+    # --------
+    df_ax9.to_excel(writer, index=False, sheet_name='ax9')
+
+    worksheet = writer.sheets['ax9']
+    column_chart = workbook.add_chart({'type': 'column'})
+
+    column_chart.add_series({'values': ['ax9', 1, 3, 20, 3],
+                             'categories': ['ax9', 1, 0, 20, 0],
+                             'name': ['ax9', 0, 3]})
+
+    column_chart.add_series({'values': ['ax9', 1, 4, 20, 4],
+                             'categories': ['ax9', 1, 0, 20, 0],
+                             'name': ['ax9', 0, 4]})
+
+    line_chart = workbook.add_chart({'type': 'line'})
+
+    # Configure the data series for the secondary chart. We also set a
+    # secondary Y axis via (y2_axis).
+    line_chart.add_series({
+        'name': ['ax9', 0, 1],
+        'categories': ['ax9', 1, 0, 20, 0],
+        'values': ['ax9', 1, 1, 20, 1],
+        'y2_axis': True,
+    })
+
+    line_chart.add_series({
+        'name': ['ax9', 0, 2],
+        'categories': ['ax9', 1, 0, 20, 0],
+        'values': ['ax9', 1, 2, 20, 2],
+        'y2_axis': True,
+    })
+
+    # Combine the charts.
+    column_chart.combine(line_chart)
+
+    # Configure the chart axes.
+    column_chart.set_x_axis({'name': df_ax9.columns[0]})
+    column_chart.set_y_axis({'name': 'Freq'})
+    column_chart.set_legend({'position': 'bottom'})
+    column_chart.set_title({'name': f'Arrêts turbines {period}'})
+
+    line_chart.set_y2_axis({'name': 'Duration'})
+
+    # Insert the chart into the worksheet.
+    worksheet.insert_chart('G2', column_chart)
+    # --------
+    df_ax18.to_excel(writer, index=False, sheet_name='ax18')
+
+    worksheet = writer.sheets['ax18']
+    column_chart = workbook.add_chart({'type': 'column',
+                                       'subtype': 'stacked'})
+
+    for col in range(1, 3):
+        column_chart.add_series({'values': ['ax18', 1, col, 20, col],
+                                 'categories': ['ax18', 1, 0, 20, 0],
+                                 'name': ['ax18', 0, col]})
+
+    # Configure the chart axes.
+    column_chart.set_x_axis({'name': df_ax18.columns[0]})
+    column_chart.set_y_axis({'name': df_ax18.columns[1]})
+    column_chart.set_legend({'position': 'bottom'})
+    column_chart.set_title(
+        {'name': 'Energie perdue selon FSA cumulée sur l\'année 2020 en MWh',
+         'font':  {'name': 'Arial', 'size': 9}})
+
+    # Insert the chart into the worksheet.
+    worksheet.insert_chart('E2', column_chart)
+
+
+# %%
