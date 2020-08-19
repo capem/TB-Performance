@@ -475,10 +475,11 @@ def make_chart_ax3():
     column_chart.combine(line_chart)
 
     # Configure the chart axes.
-    column_chart.set_x_axis({'name': df_ax3.columns[0]})
+    # column_chart.set_x_axis({'name': df_ax3.columns[0]})
     column_chart.set_y_axis({'name': df_ax3.columns[1]})
     column_chart.set_legend({'position': 'bottom'})
-    column_chart.set_title({'name': 'Cumul annuel par type d\'alarme'})
+    column_chart.set_title({'name': 'Cumul annuel par type d\'alarme',
+                            'name_font': {'size': 12, 'bold': True}})
     line_chart.set_y2_axis({'name': df_ax3.columns[2]})
     return column_chart
 
@@ -489,7 +490,7 @@ worksheet.insert_chart('E2', column_chart)
 
 column_chart = make_chart_ax3()
 # Insert the chart into the worksheet.
-dashsheet.insert_chart('B42', column_chart)
+dashsheet.insert_chart('E42', column_chart)
 
 
 # -------------------------------------------------------------------------------------------
@@ -520,10 +521,11 @@ def make_chart_ax5():
     column_chart.combine(line_chart)
 
     # Configure the chart axes.
-    column_chart.set_x_axis({'name': df_ax5.columns[0]})
+    # column_chart.set_x_axis({'name': df_ax5.columns[0]})
     column_chart.set_y_axis({'name': df_ax5.columns[1]})
     column_chart.set_legend({'position': 'bottom'})
-    column_chart.set_title({'name': f'Type d\'alarme {period}'})
+    column_chart.set_title({'name': f'Type d\'alarme {period}',
+                            'name_font': {'size': 12, 'bold': True}})
 
     line_chart.set_y2_axis({'name': df_ax5.columns[2]})
     return column_chart
@@ -570,7 +572,8 @@ def make_chart_ax6():
     column_chart.set_x_axis({'name': df_ax6.columns[0]})
     column_chart.set_y_axis({'name': df_ax6.columns[1]})
     column_chart.set_legend({'position': 'bottom'})
-    column_chart.set_title({'name': f'Alarmes {period}'})
+    column_chart.set_title({'name': f'Alarmes {period}',
+                            'name_font': {'size': 12, 'bold': True}})
 
     line_chart.set_y2_axis({'name': df_ax6.columns[2]})
     return column_chart
@@ -628,7 +631,8 @@ def make_chart_ax8():
     column_chart.set_x_axis({'name': df_ax8.columns[0]})
     column_chart.set_y_axis({'name': 'Freq'})
     column_chart.set_legend({'position': 'bottom'})
-    column_chart.set_title({'name': 'Arrêts turbines : Cumul Annuel'})
+    column_chart.set_title({'name': 'Arrêts turbines : Cumul Annuel',
+                            'name_font': {'size': 12, 'bold': True}})
 
     line_chart.set_y2_axis({'name': 'Duration'})
     return column_chart
@@ -688,7 +692,7 @@ def make_chart_ax9():
     column_chart.set_y_axis({'name': 'Freq'})
     column_chart.set_legend({'position': 'bottom'})
     column_chart.set_title({'name': f'Arrêts turbines {period}',
-                            'font':  {'name': 'Arial', 'size': 9}})
+                            'name_font': {'size': 12, 'bold': True}})
 
     line_chart.set_y2_axis({'name': 'Duration'})
     return column_chart
@@ -720,11 +724,11 @@ def make_chart_ax18():
 
     # Configure the chart axes.
     column_chart.set_x_axis({'name': df_ax18.columns[0]})
-    column_chart.set_y_axis({'name': df_ax18.columns[1]})
+    # column_chart.set_y_axis({'name': df_ax18.columns[1]})
     column_chart.set_legend({'position': 'bottom'})
     column_chart.set_title(
         {'name': 'Energie perdue selon FSA cumulée sur l\'année 2020 en MWh',
-         'name_font': {'size': 10, 'bold': True}}
+         'name_font': {'size': 12, 'bold': True}}
     )
     return column_chart
 
